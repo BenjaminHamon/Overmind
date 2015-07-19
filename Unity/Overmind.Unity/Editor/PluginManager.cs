@@ -56,15 +56,13 @@ namespace Overmind.Unity.Editor
 
 		private static PluginManifest LoadManifest()
 		{
-			PluginManifest manifest = AssetDatabase.LoadAssetAtPath<PluginManifest>("Assets/Plugins/Editor/PluginManifest.asset");
+			PluginManifest manifest = AssetDatabase.LoadAssetAtPath<PluginManifest>("Assets/Plugins/PluginManifest.asset");
 			if (manifest == null)
 			{
 				if (AssetDatabase.IsValidFolder("Assets/Plugins") == false)
 					AssetDatabase.CreateFolder("Assets", "Plugins");
-				if (AssetDatabase.IsValidFolder("Assets/Plugins/Editor") == false)
-					AssetDatabase.CreateFolder("Assets/Plugins", "Editor");
 				manifest = ScriptableObject.CreateInstance<PluginManifest>();
-				AssetDatabase.CreateAsset(manifest, "Assets/Plugins/Editor/PluginManifest.asset");
+				AssetDatabase.CreateAsset(manifest, "Assets/Plugins/PluginManifest.asset");
 				AssetDatabase.SaveAssets();
 			}
 			return manifest;
