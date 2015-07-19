@@ -1,0 +1,4 @@
+﻿move 2 4 3 5
+take 3 5 2 6
+take 1 7 2 6
+move 3 5 2 6

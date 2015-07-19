@@ -1,0 +1,20 @@
+{
+  "Name": "Chess",
+  "AssemblyName": null,
+  "FileCollection": [
+    "Bishop.cs",
+    "BishopRule.cs",
+    "King.cs",
+    "KingRule.cs",
+    "Knight.cs",
+    "KnightRule.cs",
+    "Main.cs",
+    "Pawn.cs",
+    "PawnRule.cs",
+    "Queen.cs",
+    "QueenRule.cs",
+    "Rook.cs",
+    "RookRule.cs"
+  ],
+  "EntryPoint": "Overmind.Chess.Main"
+}

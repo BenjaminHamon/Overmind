@@ -1,0 +1,10 @@
+{
+  "Name": "Checkers",
+  "AssemblyName": null,
+  "FileCollection": [
+    "CheckerRule.cs",
+    "Main.cs",
+    "ScriptedStrategy.cs"
+  ],
+  "EntryPoint": "Overmind.Checkers.Main"
+}
