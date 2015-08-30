@@ -31,15 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Overmind.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Overmind.Games.Engine\bin\Debug\Overmind.Core.dll</HintPath>
+    <Reference Include="Overmind.Core">
+      <HintPath>..\..\Overmind.Games.Engine\bin\$(Configuration)\Overmind.Core.dll</HintPath>
     </Reference>
     <Reference Include="Overmind.Games.Engine">
-      <HintPath>..\..\Overmind.Games.Engine\bin\Debug\Overmind.Games.Engine.dll</HintPath>
+      <HintPath>..\..\Overmind.Games.Engine\bin\$(Configuration)\Overmind.Games.Engine.dll</HintPath>
     </Reference>
     <Reference Include="Rackspace.Collections.Immutable">
-      <HintPath>..\..\Overmind.Games.Engine\bin\Debug\Rackspace.Collections.Immutable.dll</HintPath>
+      <HintPath>..\..\Overmind.Games.Engine\bin\$(Configuration)\Rackspace.Collections.Immutable.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
