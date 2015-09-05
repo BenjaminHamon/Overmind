@@ -8,6 +8,8 @@ namespace Overmind.Checkers
 {
 	public class Main : IGameBuilder
 	{
+		public const int BoardSize = 10;
+
 		private static Vector[] WhiteSetup = { 
 			new Vector(1, 1), new Vector(3, 1), new Vector(5, 1), new Vector(7, 1), new Vector(9, 1),
 			new Vector(2, 2), new Vector(4, 2), new Vector(6, 2), new Vector(8, 2), new Vector(10, 2),
@@ -26,15 +28,15 @@ namespace Overmind.Checkers
 
 		public Game Create()
 		{
-			Game game = new Game(10);
+			Game game = new Game(BoardSize);
 
 			Player player = new Player(game, "White", Color.White);
-			player.PieceCollection = WhiteSetup.Select(position => new Piece(player, position, new CheckerRule(true))).ToList();
+			player.EntityCollection = WhiteSetup.Select(position => (Entity)new Piece(player, position, true)).ToList();
 			//player.Strategy = new ScriptedStrategy(player, File.ReadAllLines(Path.Combine(ScriptDirectory, "ScriptedStrategy_White.txt")));
 			game.AddPlayer(player);
 
 			player = new Player(game, "Black", Color.Black);
-			player.PieceCollection = BlackSetup.Select(position => new Piece(player, position, new CheckerRule(false))).ToList();
+			player.EntityCollection = BlackSetup.Select(position => (Entity)new Piece(player, position, false)).ToList();
 			//player.Strategy = new ScriptedStrategy(player, File.ReadAllLines(Path.Combine(ScriptDirectory, "ScriptedStrategy_Black.txt")));
 			game.AddPlayer(player);
 
