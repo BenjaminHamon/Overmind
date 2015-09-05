@@ -2,6 +2,7 @@
 using Overmind.Games.Engine;
 using Overmind.Unity;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace Overmind.Games.Unity
 		public string Mod;
 
 		private Game game;
+		private ContentLoader contentLoader;
 		
 		public override void Start()
 		{
@@ -21,11 +23,23 @@ namespace Overmind.Games.Unity
 
 			game = UnityApplication.Instance.Loader.Load(Mod);
 
-			ContentLoader contentLoader = new ContentLoader();
-			StartCoroutine(contentLoader.LoadAssetBundleAsync(Mod, LateStart));
+			contentLoader = new ContentLoader("file:///E:/Projects/Overmind/Games/Mods");
+			DependencyReadyStatus.Add(contentLoader, false);
+			contentLoader.Ready += OnDependencyReady;
+			StartCoroutine(contentLoader.LoadAssetBundleAsync(Mod));
 		}
 
-		private void LateStart(AssetBundle assetBundle)
+		private readonly IDictionary<object, bool> DependencyReadyStatus = new Dictionary<object, bool>();
+
+		private void OnDependencyReady(IDependency dependency)
+		{
+			dependency.Ready -= OnDependencyReady;
+			DependencyReadyStatus[dependency] = true;
+			if (DependencyReadyStatus.Values.All(status => status))
+				DoStart();
+		}
+
+		private void DoStart()
 		{
 			BoardSize = game.BoardSize;
 			for (int cellIndex = 0; cellIndex < BoardSize * BoardSize; cellIndex++)
@@ -35,22 +49,38 @@ namespace Overmind.Games.Unity
 				CellView view = cell.GetComponent<CellView>();
 				view.Position = new Vector((cellIndex % BoardSize) + 1, (cellIndex / BoardSize) + 1);
 				view.name = "Cell " + view.Position;
-				view.Selected += OnCellSelected;
-				view.Targeted += OnCellTargeted;
+				view.Clicked += OnCellClicked;
 			}
 
 			foreach (Player player in game.PlayerCollection)
 			{
-				foreach (Piece piece in player.PieceCollection)
-				{
-					GameObject pieceObject = Instantiate(PiecePrefab);
-					pieceObject.GetComponent<PieceView>().Initialize(this, piece, assetBundle);
-					pieceObject.transform.SetParent(GetCell(piece.Position).transform);
-				}
+				PlayerView playerView = Instantiate<GameObject>(PlayerViewPrefab).GetComponent<PlayerView>();
+				playerView.gameObject.SetActive(false);
+				playerView.Initialize(player);
+				playerView.transform.SetParent(PlayerViewGroup, false);
+				playerViewCollection.Add(playerView);
+
+				foreach (Piece entity in player.PieceCollection)
+					CreateEntityView(player, entity);
+
+				player.EntityAdded += CreateEntityView;
+				playerView.Selection.Changed += OnSelectionChanged;
 			}
 
+			game.TurnStarted += OnTurnStarted;
 			game.Start();
-			ActivePlayerText.text = game.ActivePlayer.ToString();
+		}
+
+		private readonly IList<PlayerView> playerViewCollection = new List<PlayerView>();
+		private PlayerView activePlayerView;
+		public Transform PlayerViewGroup;
+		public GameObject PlayerViewPrefab;
+
+		private void CreateEntityView(Player player, Piece entity)
+		{
+			PieceView entityView = Instantiate(PiecePrefab).GetComponent<PieceView>();
+			entityView.Initialize(this, playerViewCollection.First(playerView => playerView.Player == player), entity, contentLoader.GetAssetBundle(Mod));
+			entityView.transform.SetParent(GetCell(entity.Position).transform, false);
 		}
 
 		public GridLayoutGroup Grid;
@@ -72,41 +102,31 @@ namespace Overmind.Games.Unity
 				RectTransform transform = (RectTransform)Grid.transform;
 				Grid.cellSize = new Vector2(transform.rect.width / boardSize, transform.rect.height / boardSize);
 				Grid.constraintCount = boardSize;
-
 			}
 		}
 
-		public Text ActivePlayerText;
+		public Text TurnText;
+		public EntityInfoView EntityInfo;
 
-		private CellView selection;
-		private CellView Selection
+		private void OnTurnStarted()
 		{
-			get { return selection; }
-			set
-			{
-				if (selection != null)
-					selection.IsSelected = false;
-				selection = value;
-			}
+			if (activePlayerView != null)
+				activePlayerView.gameObject.SetActive(false);
+
+			activePlayerView = playerViewCollection.First(playerView => playerView.Player == game.ActivePlayer);
+			activePlayerView.gameObject.SetActive(true);
+
+			TurnText.text = "Turn " + game.Turn;
 		}
 
-		private void OnCellSelected(CellView sender)
+		private void OnSelectionChanged(Selection<CellView> sender)
 		{
-			Selection = sender;
+			EntityInfo.SetEntity(sender.Item != null ? sender.Item.GetComponentInChildren<PieceView>() : null, activePlayerView);
 		}
 
-		private void OnCellTargeted(CellView sender)
+		private void OnCellClicked(CellView sender)
 		{
-			if (Selection != null)
-			{
-				if (sender.Piece == null)
-					game.ActivePlayer.Move(Selection.Position, sender.Position);
-				else
-					game.ActivePlayer.Take(Selection.Position, sender.Position);
-				Selection = null;
-				game.NextTurn();
-				ActivePlayerText.text = game.ActivePlayer.ToString();
-			}
+			activePlayerView.OnCellClick(sender);
 		}
 
 		public CellView GetCell(Vector vector)

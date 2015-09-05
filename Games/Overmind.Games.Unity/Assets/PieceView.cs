@@ -7,35 +7,39 @@ namespace Overmind.Games.Unity
 {
 	public class PieceView : MonoBehaviourBase
 	{
-		public void Initialize(GameView game, Piece piece, AssetBundle assetBundle)
+		public void Initialize(GameView game, PlayerView owner, Piece entity, AssetBundle assetBundle)
 		{
 			this.game = game;
-			this.piece = piece;
+			this.Owner = owner;
+			this.Entity = entity;
+
+			name = entity.GetType().Name;
 			//image.color = color;
 
 			//image.sprite = Resources.Load<Sprite>("WhiteKnight");
 			//ContentLoader loader = new ContentLoader();
 			//StartCoroutine(loader.LoadAssetBundleAsync("Chess", assetBundle => image.sprite = assetBundle.LoadAsset<Sprite>("WhiteKnight")));
-			image.sprite = assetBundle.LoadAsset<Sprite>(piece.GetUnitySpriteName());
+			image.sprite = assetBundle.LoadAsset<Sprite>(entity.Image);
 
-			piece.Moved += OnMoved;
-			piece.Destroyed += OnDestroyed;
+			entity.Moved += OnMoved;
+			entity.Destroyed += OnDestroyed;
 		}
 
 		private GameView game;
-		private Piece piece;
+		public PlayerView Owner { get; private set; }
+		public Piece Entity { get; private set; }
 
 		public Image image;
 
 		private void OnMoved(Piece sender)
 		{
-			transform.SetParent(game.GetCell(piece.Position).transform, false);
+			transform.SetParent(game.GetCell(Entity.Position).transform, false);
 		}
 
 		private void OnDestroyed(Piece sender)
 		{
-			piece.Moved -= OnMoved;
-			piece.Destroyed -= OnDestroyed;
+			Entity.Moved -= OnMoved;
+			Entity.Destroyed -= OnDestroyed;
 
 			Destroy(gameObject);
 		}
