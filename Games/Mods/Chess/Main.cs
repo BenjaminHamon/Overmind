@@ -10,7 +10,7 @@ namespace Overmind.Chess
 {
 	public class Main : IGameBuilder
 	{
-		private static IDictionary<Vector, Type> WhiteSetup = new Dictionary<Vector, Type>
+		private readonly static IDictionary<Vector, Type> WhiteSetup = new Dictionary<Vector, Type>
 		{
 			{ new Vector(1, 1), typeof(Rook) },
 			{ new Vector(2, 1), typeof(Knight) },
@@ -31,7 +31,7 @@ namespace Overmind.Chess
 			{ new Vector(8, 2), typeof(Pawn) },
 		};
 
-		private static IDictionary<Vector, Type> BlackSetup = new Dictionary<Vector, Type>
+		private readonly static IDictionary<Vector, Type> BlackSetup = new Dictionary<Vector, Type>
 		{
 			{ new Vector(1, 8), typeof(Rook) },
 			{ new Vector(2, 8), typeof(Knight) },
@@ -66,8 +66,9 @@ namespace Overmind.Chess
 			{
 				if (pair.Value == typeof(Pawn))
 					return new Pawn(player, pair.Key, true);
-				return (Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
+				return (Overmind.Games.Engine.Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
 			}).ToList();
+			player.CommandCollection = new List<ICommand>();
 			//player.Strategy = new ScriptedStrategy(player, actionCollection.Where((_, index) => index % 2 == 0));
 			game.AddPlayer(player);
 
@@ -76,8 +77,9 @@ namespace Overmind.Chess
 			{
 				if (pair.Value == typeof(Pawn))
 					return new Pawn(player, pair.Key, false);
-				return (Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
+				return (Overmind.Games.Engine.Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
 			}).ToList();
+			player.CommandCollection = new List<ICommand>();
 			//player.Strategy = new ScriptedStrategy(player, actionCollection.Where((_, index) => index % 2 == 1));
 			game.AddPlayer(player);
 

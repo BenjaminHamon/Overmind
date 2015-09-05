@@ -28,7 +28,7 @@ namespace Overmind.Chess
 			return (move[0] == 0) && ((move[1] == VerticalDirection) || ((source[1] == StartingRow) && (move[1] == VerticalDirection * 2)));
 		}
 
-		public bool CanEat(Vector source, Vector target, out Vector destination)
+		public bool CanTake(Vector source, Vector target, out Vector destination)
 		{
 			throw new NotImplementedException();
 

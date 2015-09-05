@@ -19,7 +19,7 @@ namespace Overmind.Chess
 			return ((Math.Abs(move[0]) == 1) && (Math.Abs(move[1]) == 2)) || ((Math.Abs(move[0]) == 2) && (Math.Abs(move[1]) == 1));
 		}
 
-		public bool CanEat(Vector source, Vector target, out Vector destination)
+		public bool CanTake(Vector source, Vector target, out Vector destination)
 		{
 			throw new NotImplementedException();
 		}
