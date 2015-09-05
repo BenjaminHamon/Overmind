@@ -27,18 +27,18 @@ namespace Overmind.Games.Engine
 		public IEnumerable<ICommand> CommandCollection;
 
 		public TEntity FindEntity<TEntity>(Vector position)
-			where TEntity : Piece
+			where TEntity : Entity
 		{
-			return PieceCollection.OfType<TEntity>().FirstOrDefault(p => p.Position == position);
+			return EntityCollection.OfType<TEntity>().FirstOrDefault(p => p.Position == position);
 		}
 
-		public IList<Piece> PieceCollection;
+		public IList<Entity> EntityCollection;
 
-		public event Action<Player, Piece> EntityAdded;
+		public event EventHandler<Player, Entity> EntityAdded;
 
-		public void AddEntity(Piece entity)
+		public void AddEntity(Entity entity)
 		{
-			PieceCollection.Add(entity);
+			EntityCollection.Add(entity);
 			if (EntityAdded != null)
 				EntityAdded(this, entity);
 		}

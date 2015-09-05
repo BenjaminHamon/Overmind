@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Overmind.Chess
 {
-	public class Piece : Overmind.Games.Engine.Piece
+	public abstract class Piece : Entity
 	{
 		public Piece(Player owner, Vector position, IRule rule)
 			: base(owner, position)

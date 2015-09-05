@@ -19,7 +19,7 @@ namespace Overmind.Games.Engine
 			Turn = 1;
 			ActivePlayer = playerCollection.First();
 			if (TurnStarted != null)
-				TurnStarted();
+				TurnStarted(this);
 		}
 
 		public void AddPlayer(Player player)
@@ -32,7 +32,7 @@ namespace Overmind.Games.Engine
 		public Player ActivePlayer { get; private set; }
 
 		public TEntity FindEntity<TEntity>(Vector position)
-			where TEntity : Piece
+			where TEntity : Entity
 		{
 			foreach (Player player in PlayerCollection)
 			{
@@ -44,12 +44,12 @@ namespace Overmind.Games.Engine
 			return null;
 		}
 
-		public IEnumerable<Piece> AllPieces
+		public IEnumerable<Entity> AllEntities
 		{
 			get 
 			{
-				return playerCollection.Select(player => player.PieceCollection)
-					.Cast<IEnumerable<Piece>>().Aggregate((first, second) => first.Concat(second));
+				return playerCollection.Select(player => player.EntityCollection)
+					.Cast<IEnumerable<Entity>>().Aggregate((first, second) => first.Concat(second));
 			}
 		}
 
@@ -60,10 +60,10 @@ namespace Overmind.Games.Engine
 			Turn++;
 			ActivePlayer = playerCollection.ElementAtOrDefault(playerCollection.IndexOf(ActivePlayer) + 1) ?? playerCollection.First();
 			if (TurnStarted != null)
-				TurnStarted();
+				TurnStarted(this);
 		}
 
-		public event Action TurnStarted;
+		public event Core.EventHandler<Game> TurnStarted;
 
 		public void Dispose()
 		{

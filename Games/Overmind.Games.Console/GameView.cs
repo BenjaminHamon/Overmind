@@ -26,7 +26,7 @@ namespace Overmind.Games.Console
 			game.Start();
 		}
 
-		private void OnTurnStarted()
+		private void OnTurnStarted(Game sender)
 		{
 			Draw();
 		}
@@ -40,12 +40,12 @@ namespace Overmind.Games.Console
 		private void Play()
 		{
 			Vector source = ReadVector("Source");
-			Piece piece = game.ActivePlayer.FindEntity<Piece>(source);
-			if (piece == null)
+			Entity entity = game.ActivePlayer.FindEntity<Entity>(source);
+			if (entity == null)
 				throw new Exception("No entity found");
 
 			string commandName = Read("Command");
-			ICommand command = piece.CommandCollection.First(c => c.Name == commandName);
+			ICommand command = entity.CommandCollection.First(c => c.Name == commandName);
 
 			Vector destination = ReadVector("Destination");
 			command.Execute(destination);
@@ -95,12 +95,12 @@ namespace Overmind.Games.Console
 
 		private void DrawGrid()
 		{
-			GridView<Piece> grid = new GridView<Piece>(System.Console.Out);
+			GridView<Entity> grid = new GridView<Entity>(System.Console.Out);
 
-			grid.PreWrite = piece => System.Console.ForegroundColor = piece.Owner.Color.Value.ToConsoleColor();
-			grid.PostWrite = piece => System.Console.ResetColor();
+			grid.PreWrite = entity => System.Console.ForegroundColor = entity.Owner.Color.Value.ToConsoleColor();
+			grid.PostWrite = entity => System.Console.ResetColor();
 
-			grid.Draw(1, game.BoardSize, 1, game.BoardSize, game.AllPieces, p => p.Position, p => p.ToShortString());
+			grid.Draw(1, game.BoardSize, 1, game.BoardSize, game.AllEntities, p => p.Position, p => p.ToShortString());
 		}
 
 		protected override void Exit()

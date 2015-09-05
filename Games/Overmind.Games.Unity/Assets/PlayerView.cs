@@ -27,11 +27,14 @@ namespace Overmind.Games.Unity
 
 			Update();
 
-			foreach (ICommand command in Player.CommandCollection)
+			if (Player.CommandCollection != null)
 			{
-				GameObject commandView = Instantiate<GameObject>(CommandButtonPrefab);
-				commandView.GetComponent<CommandView>().Initialize(this, command);
-				commandView.transform.SetParent(CommandCollectionTransform);
+				foreach (ICommand command in Player.CommandCollection)
+				{
+					GameObject commandView = Instantiate<GameObject>(CommandButtonPrefab);
+					commandView.GetComponent<CommandView>().Initialize(this, command);
+					commandView.transform.SetParent(CommandCollectionTransform);
+				}
 			}
 		}
 

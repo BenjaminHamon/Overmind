@@ -26,7 +26,7 @@ namespace Overmind.Chess
 			Piece targetPiece = game.FindEntity<Piece>(target);
 			if (targetPiece == null)
 				throw new Exception("Target piece not found");
-			if (PieceCollection.Contains(targetPiece))
+			if (EntityCollection.Contains(targetPiece))
 				throw new Exception("Target piece belongs to the active player");
 			if (game.FindEntity<Piece>(destination) != null)
 				throw new Exception("Destination is occupied");

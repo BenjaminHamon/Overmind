@@ -60,7 +60,7 @@ namespace Overmind.Games.Unity
 				playerView.transform.SetParent(PlayerViewGroup, false);
 				playerViewCollection.Add(playerView);
 
-				foreach (Piece entity in player.PieceCollection)
+				foreach (Entity entity in player.EntityCollection)
 					CreateEntityView(player, entity);
 
 				player.EntityAdded += CreateEntityView;
@@ -76,16 +76,16 @@ namespace Overmind.Games.Unity
 		public Transform PlayerViewGroup;
 		public GameObject PlayerViewPrefab;
 
-		private void CreateEntityView(Player player, Piece entity)
+		private void CreateEntityView(Player player, Entity entity)
 		{
-			PieceView entityView = Instantiate(PiecePrefab).GetComponent<PieceView>();
+			EntityView entityView = Instantiate(EntityPrefab).GetComponent<EntityView>();
 			entityView.Initialize(this, playerViewCollection.First(playerView => playerView.Player == player), entity, contentLoader.GetAssetBundle(Mod));
 			entityView.transform.SetParent(GetCell(entity.Position).transform, false);
 		}
 
 		public GridLayoutGroup Grid;
 		public GameObject CellPrefab;
-		public GameObject PiecePrefab;
+		public GameObject EntityPrefab;
 
 		[SerializeField, HideInInspector]
 		private int boardSize = 10;
@@ -108,7 +108,7 @@ namespace Overmind.Games.Unity
 		public Text TurnText;
 		public EntityInfoView EntityInfo;
 
-		private void OnTurnStarted()
+		private void OnTurnStarted(Game sender)
 		{
 			if (activePlayerView != null)
 				activePlayerView.gameObject.SetActive(false);
@@ -121,7 +121,7 @@ namespace Overmind.Games.Unity
 
 		private void OnSelectionChanged(Selection<CellView> sender)
 		{
-			EntityInfo.SetEntity(sender.Item != null ? sender.Item.GetComponentInChildren<PieceView>() : null, activePlayerView);
+			EntityInfo.SetEntity(sender.Item != null ? sender.Item.GetComponentInChildren<EntityView>() : null, activePlayerView);
 		}
 
 		private void OnCellClicked(CellView sender)

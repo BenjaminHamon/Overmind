@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 namespace Overmind.Games.Engine
 {
-	public class Piece
+	/// <summary>
+	/// Base class for a game entity. It belongs to a player and is placed in the game world.
+	/// </summary>
+	public abstract class Entity
 	{
-		public Piece(Player owner, Vector position)
+		protected Entity(Player owner, Vector position)
 		{
 			this.Owner = owner;
 			this.position = position;
@@ -28,15 +31,9 @@ namespace Overmind.Games.Engine
 
 		public IEnumerable<ICommand> CommandCollection;
 
-		public override string ToString()
-		{
-			return String.Format("Piece Owner=[{0}] Position={1}", Owner, Position);
-		}
+		public override string ToString() { return String.Format("Entity Owner=[{0}] Position={1}", Owner, Position); }
 
-		public virtual string ToShortString()
-		{
-			return "P";
-		}
+		public abstract string ToShortString();
 
 		public virtual string Image
 		{
@@ -48,15 +45,13 @@ namespace Overmind.Games.Engine
 			}
 		}
 
-		public delegate void MovedEventHandler(Piece sender);
-		public event MovedEventHandler Moved;
+		public event Core.EventHandler<Entity> Moved;
 
-		public delegate void DestroyedEventHandler(Piece sender);
-		public event DestroyedEventHandler Destroyed;
+		public event Core.EventHandler<Entity> Destroyed;
 
 		public void Destroy()
 		{
-			Owner.PieceCollection.Remove(this);
+			Owner.EntityCollection.Remove(this);
 			if (Destroyed != null)
 				Destroyed(this);
 		}

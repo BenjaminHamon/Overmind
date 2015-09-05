@@ -14,7 +14,7 @@ namespace Overmind.Games.CityBuilder
 
 		public void Build(Vector position)
 		{
-			if (FindEntity<Piece>(position) != null)
+			if (FindEntity<Entity>(position) != null)
 				throw new Exception("[Player.Build] Position is already occupied.");
 			if (ResourceCollection[GoldResource] < 10)
 				throw new Exception("[Player.Build] Not enough gold.");
@@ -25,7 +25,7 @@ namespace Overmind.Games.CityBuilder
 
 		public void Destroy(Vector position)
 		{
-			Piece entity = FindEntity<Piece>(position);
+			Entity entity = FindEntity<Entity>(position);
 			if (entity == null)
 				throw new Exception("[Player.Destroy] No entity found.");
 
@@ -34,7 +34,7 @@ namespace Overmind.Games.CityBuilder
 
 		protected override void Update()
 		{
-			foreach (House house in PieceCollection)
+			foreach (House house in EntityCollection)
 			{
 				ResourceCollection[GoldResource] += 5;
 			}

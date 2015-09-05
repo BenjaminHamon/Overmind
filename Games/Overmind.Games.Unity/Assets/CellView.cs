@@ -9,7 +9,7 @@ namespace Overmind.Games.Unity
 {
 	public class CellView : MonoBehaviourBase, IPointerClickHandler, ISelectable
 	{
-		public PieceView Piece { get { return GetComponentInChildren<PieceView>(); } }
+		public EntityView Entity { get { return GetComponentInChildren<EntityView>(); } }
 		public Vector Position;
 
 		public void OnPointerClick(PointerEventData eventData)

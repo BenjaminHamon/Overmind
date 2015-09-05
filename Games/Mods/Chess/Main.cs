@@ -62,22 +62,22 @@ namespace Overmind.Chess
 			IEnumerable<string> actionCollection = File.ReadAllLines(filePath);
 
 			Player player = new Player(game, "White", Color.White);
-			player.PieceCollection = WhiteSetup.Select(pair =>
+			player.EntityCollection = WhiteSetup.Select(pair =>
 			{
 				if (pair.Value == typeof(Pawn))
 					return new Pawn(player, pair.Key, true);
-				return (Overmind.Games.Engine.Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
+				return (Entity)Activator.CreateInstance(pair.Value, player, pair.Key);
 			}).ToList();
 			player.CommandCollection = new List<ICommand>();
 			//player.Strategy = new ScriptedStrategy(player, actionCollection.Where((_, index) => index % 2 == 0));
 			game.AddPlayer(player);
 
 			player = new Player(game, "Black", Color.Black);
-			player.PieceCollection = BlackSetup.Select(pair =>
+			player.EntityCollection = BlackSetup.Select(pair =>
 			{
 				if (pair.Value == typeof(Pawn))
 					return new Pawn(player, pair.Key, false);
-				return (Overmind.Games.Engine.Piece)Activator.CreateInstance(pair.Value, player, pair.Key);
+				return (Entity)Activator.CreateInstance(pair.Value, player, pair.Key);
 			}).ToList();
 			player.CommandCollection = new List<ICommand>();
 			//player.Strategy = new ScriptedStrategy(player, actionCollection.Where((_, index) => index % 2 == 1));

@@ -7,9 +7,9 @@ namespace Overmind.Games.Unity
 {
 	public class EntityInfoView : MonoBehaviourBase
 	{
-		public PieceView Entity { get; private set; }
+		public EntityView Entity { get; private set; }
 
-		public void SetEntity(PieceView entity, PlayerView activePlayer)
+		public void SetEntity(EntityView entity, PlayerView activePlayer)
 		{
 			this.Entity = entity;
 			UpdateCommands(activePlayer);

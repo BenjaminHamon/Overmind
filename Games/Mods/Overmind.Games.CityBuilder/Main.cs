@@ -12,7 +12,7 @@ namespace Overmind.Games.CityBuilder
 
 			Player player = new Player(game, "Player");
 
-			player.PieceCollection = new List<Piece>();
+			player.EntityCollection = new List<Entity>();
 
 			player.ResourceCollection = new Dictionary<string, int>()
 			{
