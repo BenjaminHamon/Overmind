@@ -14,21 +14,22 @@ namespace Overmind.Games.Console
 		{
 			this.game = game;
 
-			//RegisterCommand("show", _ => DrawGrid());
-			//RegisterCommand("list", _ => List());
-
-			RegisterCommand("move", _ => Move());
-			RegisterCommand("take", _ => Take());
-
-			// Let mod register register actions ?
-
-			RegisterCommand("next", _ => NextTurn());
 			RegisterCommand("play", _ => Play());
 
-			Draw();
+			game.TurnStarted += OnTurnStarted;
 		}
 
 		private readonly Game game;
+
+		public void Start()
+		{
+			game.Start();
+		}
+
+		private void OnTurnStarted()
+		{
+			Draw();
+		}
 
 		private Vector ReadVector(string message)
 		{
@@ -36,55 +37,47 @@ namespace Overmind.Games.Console
 			return new Vector(Double.Parse(arguments[0]), Double.Parse(arguments[1]));
 		}
 
-		private void Move()
-		{
-			Vector source = ReadVector("Source");
-			Vector destination = ReadVector("Destination");
-			game.ActivePlayer.Move(source, destination);
-
-			NextTurn();
-		}
-
-		private void Take()
-		{
-			Vector source = ReadVector("Source");
-			Vector target = ReadVector("Target");
-			game.ActivePlayer.Take(source, target);
-
-			NextTurn();
-		}
-
-		private Timer playTimer;
-
 		private void Play()
 		{
-			if (playTimer != null)
-				throw new Exception("Already running");
+			Vector source = ReadVector("Source");
+			Piece piece = game.ActivePlayer.FindEntity<Piece>(source);
+			if (piece == null)
+				throw new Exception("No entity found");
 
-			playTimer = new Timer(PlayTimerCallback, null, 0, 1000);
+			string commandName = Read("Command");
+			ICommand command = piece.CommandCollection.First(c => c.Name == commandName);
+
+			Vector destination = ReadVector("Destination");
+			command.Execute(destination);
 		}
 
-		private void PlayTimerCallback(object state)
+		private Timer autoPlayTimer;
+
+		private void StartAutoPlay()
+		{
+			throw new NotImplementedException();
+
+			if (autoPlayTimer != null)
+				throw new Exception("Already running");
+
+			autoPlayTimer = new Timer(AutoPlay, null, 0, 1000);
+		}
+
+		private void AutoPlay(object state)
 		{
 			try
 			{
-				NextTurn();
+				//NextTurn();
 			}
 			catch (Exception exception)
 			{
-				if (playTimer != null)
+				if (autoPlayTimer != null)
 				{
 					System.Console.Error.WriteLine(exception);
-					playTimer.Dispose();
-					playTimer = null;
+					autoPlayTimer.Dispose();
+					autoPlayTimer = null;
 				}
 			}
-		}
-
-		private void NextTurn()
-		{
-			game.NextTurn();
-			Draw();
 		}
 
 		private void Draw()
@@ -104,14 +97,7 @@ namespace Overmind.Games.Console
 		{
 			GridView<Piece> grid = new GridView<Piece>(System.Console.Out);
 
-			grid.PreWrite = piece =>
-			{
-				if (game.ActivePlayer.PieceCollection.Contains(piece))
-					System.Console.ForegroundColor = ConsoleColor.Yellow;
-				else
-					System.Console.ForegroundColor = ConsoleColor.Red;
-			};
-
+			grid.PreWrite = piece => System.Console.ForegroundColor = piece.Owner.Color.Value.ToConsoleColor();
 			grid.PostWrite = piece => System.Console.ResetColor();
 
 			grid.Draw(1, game.BoardSize, 1, game.BoardSize, game.AllPieces, p => p.Position, p => p.ToShortString());

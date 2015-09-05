@@ -31,18 +31,9 @@ namespace Overmind.Games.Console
 
 		private void StartNewGame(string[] args)
 		{
-			//System.Console.WriteLine("Welcome, commander.");
-			//System.Console.Write("Enter your character name: ");
-			//string characterName = System.Console.ReadLine();
-
-			Game game = loader.Load(args[0]);
-
-			//game.Add(new Unit(new Vector(0, 0)));
-			//game.Add(new Unit(new Vector(0, 1)));
-			//game.Add(new Unit(new Vector(0, 2)));
-
+			GameView game = new GameView(loader.Load(args[0]));
 			game.Start();
-			RunSubView(new GameView(game));
+			RunSubView(game);
 		}
 	}
 }
