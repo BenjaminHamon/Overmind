@@ -18,7 +18,7 @@ namespace Overmind.Chess
 
 			source.Position = destination;
 
-			EndTurn();
+			InternalEndTurn();
 		}
 
 		public void Take(Piece source, Vector target, Vector destination)
@@ -34,7 +34,9 @@ namespace Overmind.Chess
 			targetPiece.Destroy();
 			source.Position = destination;
 
-			EndTurn();
+			InternalEndTurn();
 		}
+
+		public override bool CanEndTurn { get { return false; } }
 	}
 }

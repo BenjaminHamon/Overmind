@@ -54,7 +54,16 @@ namespace Overmind.Games.Engine
 			//	Strategy.Update();
 		}
 
+		public virtual bool CanEndTurn { get { return true; } }
+
 		public void EndTurn()
+		{
+			if (CanEndTurn == false)
+				throw new Exception("[Player.EndTurn] Forbidden");
+			InternalEndTurn();
+		}
+
+		protected void InternalEndTurn()
 		{
 			Update();
 			game.EndTurn();

@@ -24,7 +24,8 @@ namespace Overmind.Games.Unity
 		public PlayerView Owner { get; private set; }
 		public Entity Entity { get; private set; }
 
-		public Image image;
+		[SerializeField]
+		private Image image;
 
 		private void OnMoved(Entity sender)
 		{

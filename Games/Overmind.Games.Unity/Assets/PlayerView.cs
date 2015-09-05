@@ -36,6 +36,9 @@ namespace Overmind.Games.Unity
 					commandView.transform.SetParent(CommandCollectionTransform);
 				}
 			}
+
+			if (Player.CanEndTurn)
+				EndTurnButton.SetActive(true);
 		}
 
 		public override void Update()
@@ -50,12 +53,17 @@ namespace Overmind.Games.Unity
 				ResourceText.text = null;
 		}
 
-		public Text NameText;
-		public Text ScoreText;
-		public Text ResourceText;
+		[SerializeField]
+		private Text NameText;
+		[SerializeField]
+		private Text ScoreText;
+		[SerializeField]
+		private Text ResourceText;
 
-		public Transform CommandCollectionTransform;
-		public GameObject CommandButtonPrefab;
+		[SerializeField]
+		private Transform CommandCollectionTransform;
+		[SerializeField]
+		private GameObject CommandButtonPrefab;
 
 		public ICommand CurrentCommand;
 
@@ -70,6 +78,9 @@ namespace Overmind.Games.Unity
 				Selection.Item = null;
 			}
 		}
+
+		[SerializeField]
+		private GameObject EndTurnButton;
 
 		public void EndTurn()
 		{

@@ -21,7 +21,8 @@ namespace Overmind.Games.Unity
 
 		public event Action<CellView> Clicked;
 
-		public Image Border;
+		[SerializeField]
+		private Image Border;
 
 		private bool isSelected;
 		public bool IsSelected

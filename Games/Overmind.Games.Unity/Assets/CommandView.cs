@@ -1,5 +1,6 @@
 ﻿using Overmind.Games.Engine;
 using Overmind.Unity;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Overmind.Games.Unity
@@ -15,7 +16,8 @@ namespace Overmind.Games.Unity
 			Label.text = command.Name;
 		}
 
-		public Text Label;
+		[SerializeField]
+		private Text Label;
 
 		private PlayerView owner;
 		private ICommand command;

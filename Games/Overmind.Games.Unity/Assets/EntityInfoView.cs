@@ -27,10 +27,13 @@ namespace Overmind.Games.Unity
 			}
 		}
 
-		public Text NameText;
+		[SerializeField]
+		private Text NameText;
 
-		public Transform CommandGroup;
-		public GameObject CommandButtonPrefab;
+		[SerializeField]
+		private Transform CommandGroup;
+		[SerializeField]
+		private GameObject CommandButtonPrefab;
 
 		private void UpdateCommands(PlayerView activePlayer)
 		{

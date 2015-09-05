@@ -73,8 +73,10 @@ namespace Overmind.Games.Unity
 
 		private readonly IList<PlayerView> playerViewCollection = new List<PlayerView>();
 		private PlayerView activePlayerView;
-		public Transform PlayerViewGroup;
-		public GameObject PlayerViewPrefab;
+		[SerializeField]
+		private Transform PlayerViewGroup;
+		[SerializeField]
+		private GameObject PlayerViewPrefab;
 
 		private void CreateEntityView(Player player, Entity entity)
 		{
@@ -83,9 +85,12 @@ namespace Overmind.Games.Unity
 			entityView.transform.SetParent(GetCell(entity.Position).transform, false);
 		}
 
-		public GridLayoutGroup Grid;
-		public GameObject CellPrefab;
-		public GameObject EntityPrefab;
+		[SerializeField]
+		private GridLayoutGroup Grid;
+		[SerializeField]
+		private GameObject CellPrefab;
+		[SerializeField]
+		private GameObject EntityPrefab;
 
 		[SerializeField, HideInInspector]
 		private int boardSize = 10;
@@ -105,8 +110,10 @@ namespace Overmind.Games.Unity
 			}
 		}
 
-		public Text TurnText;
-		public EntityInfoView EntityInfo;
+		[SerializeField]
+		private Text TurnText;
+		[SerializeField]
+		private EntityInfoView EntityInfo;
 
 		private void OnTurnStarted(Game sender)
 		{
@@ -121,7 +128,7 @@ namespace Overmind.Games.Unity
 
 		private void OnSelectionChanged(Selection<CellView> sender)
 		{
-			EntityInfo.SetEntity(sender.Item != null ? sender.Item.GetComponentInChildren<EntityView>() : null, activePlayerView);
+			EntityInfo.SetEntity(sender.Item != null ? sender.Item.Entity : null, activePlayerView);
 		}
 
 		private void OnCellClicked(CellView sender)

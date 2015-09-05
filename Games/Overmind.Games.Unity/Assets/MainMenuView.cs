@@ -7,37 +7,40 @@ using UnityEngine;
 
 namespace Overmind.Games.Unity
 {
-    public class MainMenuView : MonoBehaviourBase
-    {
-        private Loader loader { get { return UnityApplication.Instance.Loader; } }
+	public class MainMenuView : MonoBehaviourBase
+	{
+		private Loader loader { get { return UnityApplication.Instance.Loader; } }
 
-        public TextAsset ConfigurationFile;
-        public Transform ModListView;
-        public GameObject ModItemPrefab;
+		[SerializeField]
+		private TextAsset ConfigurationFile;
+		[SerializeField]
+		private Transform ModListView;
+		[SerializeField]
+		private GameObject ModItemPrefab;
 
-        public override void Start()
-        {
-            ApplicationConfiguration configuration = JsonConvert.DeserializeObject<ApplicationConfiguration>(ConfigurationFile.text);
+		public override void Start()
+		{
+			ApplicationConfiguration configuration = JsonConvert.DeserializeObject<ApplicationConfiguration>(ConfigurationFile.text);
 
-            LoadModList();
-        }
+			LoadModList();
+		}
 
-        public void LoadModList()
-        {
-            IEnumerable<string> modCollection = loader.GetModList();
-            Debug.Log("LoadModList " + modCollection.ToCollectionString());
+		public void LoadModList()
+		{
+			IEnumerable<string> modCollection = loader.GetModList();
+			Debug.Log("LoadModList " + modCollection.ToCollectionString());
 
-            foreach (string mod in modCollection)
-            {
-                GameObject modItem = Instantiate(ModItemPrefab);
-                modItem.GetComponent<ModView>().Mod = mod;
-                modItem.transform.SetParent(ModListView);
-            }
-        }
+			foreach (string mod in modCollection)
+			{
+				GameObject modItem = Instantiate(ModItemPrefab);
+				modItem.GetComponent<ModView>().Mod = mod;
+				modItem.transform.SetParent(ModListView);
+			}
+		}
 
-        public void Exit()
-        {
-            Application.Quit();
-        }
-    }
+		public void Exit()
+		{
+			Application.Quit();
+		}
+	}
 }
