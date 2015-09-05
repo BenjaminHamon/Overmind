@@ -1,6 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Overmind.Core;
-using Overmind.Core.Log;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,11 +21,12 @@ namespace Overmind.Games.Engine
 			return Directory.GetFiles(modPath, "*.json").Select(file => Path.GetFileNameWithoutExtension(file));
 		}
 
-		// Consider .NET AddIn for compiled assembly load. https://msdn.microsoft.com/en-us/library/bb384200(v=vs.110).aspx
-		// http://stackoverflow.com/questions/835182/choosing-between-mef-and-maf-system-addin
+		// The DLL file for the loaded assembly is locked until UnityEditor is closed.
+		// I tried to load it in an AppDomain without success.
+		// http://stackoverflow.com/questions/6258160/unloading-the-assembly-loaded-with-assembly-loadfrom
 
-		// Assembly unload when game ends? http://stackoverflow.com/questions/6258160/unloading-the-assembly-loaded-with-assembly-loadfrom
-		// DLL is locked if not unloaded (in Unity).
+		// TODO: Add mod loading with already loaded assemblies when it is not possible to dynamically load them (e.g. iOS).
+		// In this case, the mods would be packaged with the application.
 
 		public Game Load(string modName)
 		{

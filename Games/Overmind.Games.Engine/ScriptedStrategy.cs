@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Overmind.Games.Engine
 {
-    public class ScriptedStrategy : IStrategy
+	public class ScriptedStrategy : IStrategy
 	{
 		private const string ScriptDirectory = @"E:\Projects\Overmind\Games\Mods\Chess";
 
@@ -43,16 +43,16 @@ namespace Overmind.Games.Engine
 
 		private void Move(Queue<string> parameters)
 		{
-			Vector source = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
-			Vector destination = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
-			owner.Move(source, destination);
+			//Vector source = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
+			//Vector destination = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
+			//owner.Move(source, destination);
 		}
 
 		private void Take(Queue<string> parameters)
 		{
-			Vector source = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
-			Vector target = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
-			owner.Take(source, target);
+			//Vector source = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
+			//Vector target = new Vector(Double.Parse(parameters.Dequeue()), Double.Parse(parameters.Dequeue()));
+			//owner.Take(source, target);
 		}
 	}
 }

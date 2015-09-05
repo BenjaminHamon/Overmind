@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Overmind.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,8 @@ namespace Overmind.Games.Engine
 		{
 			Turn = 1;
 			ActivePlayer = playerCollection.First();
+			if (TurnStarted != null)
+				TurnStarted();
 		}
 
 		public void AddPlayer(Player player)
@@ -24,20 +27,22 @@ namespace Overmind.Games.Engine
 			playerCollection.Add(player);
 		}
 
-		//private void AddPlayer(string playerName, IEnumerable<Vector> pieceSetup, IRule rule)
-		//{
-		//	ConstructorInfo strategyConstructor = scriptAssembly.GetType("GoldenAge.Scripts.ScriptedStrategy")
-		//		.GetConstructor(new Type[] { typeof(Player) });
-
-		//	Player player = new Player(this, playerName, pieceSetup, rule);
-		//	player.Strategy = (IStrategy)strategyConstructor.Invoke(new object[] { player });
-
-		//	playerCollection.Add(player);
-		//}
-
 		private readonly List<Player> playerCollection = new List<Player>();
 		public IEnumerable<Player> PlayerCollection { get { return playerCollection.AsReadOnly(); } }
 		public Player ActivePlayer { get; private set; }
+
+		public TEntity FindEntity<TEntity>(Vector position)
+			where TEntity : Piece
+		{
+			foreach (Player player in PlayerCollection)
+			{
+				TEntity entity = player.FindEntity<TEntity>(position);
+				if (entity != null)
+					return entity;
+			}
+
+			return null;
+		}
 
 		public IEnumerable<Piece> AllPieces
 		{
@@ -50,28 +55,15 @@ namespace Overmind.Games.Engine
 
 		public int Turn { get; private set; }
 
-		public void NextTurn()
+		public void EndTurn()
 		{
-			ActivePlayer.Update();
-
 			Turn++;
 			ActivePlayer = playerCollection.ElementAtOrDefault(playerCollection.IndexOf(ActivePlayer) + 1) ?? playerCollection.First();
+			if (TurnStarted != null)
+				TurnStarted();
 		}
 
-		//public void Add(Unit unit)
-		//{
-		//	unitCollection.Add(unit);
-		//}
-
-		//public Unit GetActiveUnit()
-		//{
-		//	return unitCollection.First();
-		//}
-
-		//public IEnumerable<Unit> GetUnitsInRange(Vector center, double range)
-		//{
-		//	return unitCollection.Where(unit => (unit.Position - center).Norm() <= range);
-		//}
+		public event Action TurnStarted;
 
 		public void Dispose()
 		{
