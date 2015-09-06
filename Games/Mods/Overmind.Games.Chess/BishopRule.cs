@@ -16,12 +16,14 @@ namespace Overmind.Games.Chess
 			if (IsWithinLimits(destination) == false)
 				return false;
 			Vector move = destination - source;
-			return move[0] == move[1];
+			return Math.Abs(move[0]) == Math.Abs(move[1]);
 		}
 
-		public bool CanTake(Vector source, Vector target, out Vector destination)
+		public bool CanTake(Vector source, Vector target)
 		{
-			throw new NotImplementedException();
+			return CanMove(source, target);
 		}
+
+		public bool RequirePathCheck { get { return true; } }
 	}
 }

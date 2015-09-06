@@ -28,16 +28,14 @@ namespace Overmind.Games.Chess
 			return (move[0] == 0) && ((move[1] == VerticalDirection) || ((source[1] == StartingRow) && (move[1] == VerticalDirection * 2)));
 		}
 
-		public bool CanTake(Vector source, Vector target, out Vector destination)
+		public bool CanTake(Vector source, Vector target)
 		{
-			throw new NotImplementedException();
-
-			destination = null;
-			Vector move = (target - source) * 2;
-			if ((Math.Abs(move[0]) != 2) || (Math.Abs(move[1]) != 2))
+			if (IsWithinLimits(target) == false)
 				return false;
-			destination = source + move;
-			return IsWithinLimits(destination);
+			Vector move = target - source;
+			return (Math.Abs(move[0]) == 1) && (move[1] == VerticalDirection);
 		}
+
+		public bool RequirePathCheck { get { return true; } }
 	}
 }

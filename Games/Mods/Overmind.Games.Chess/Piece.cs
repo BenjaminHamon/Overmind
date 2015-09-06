@@ -26,15 +26,14 @@ namespace Overmind.Games.Chess
 			if (rule.CanMove(Position, destination) == false)
 				throw new Exception("Invalid move");
 
-			((Player)Owner).Move(this, destination);
+			((Player)Owner).Move(this, destination, rule.RequirePathCheck);
 		}
 
-		public void Take(Vector targetPosition)
+		public void Take(Vector target)
 		{
-			Vector destination;
-			if (rule.CanTake(Position, targetPosition, out destination) == false) // FIXME: NO need for destination in Chess
+			if (rule.CanTake(Position, target) == false)
 				throw new Exception("Invalid take");
-			((Player)Owner).Take(this, targetPosition, destination);
+			((Player)Owner).Take(this, target, rule.RequirePathCheck);
 		}
 	}
 }

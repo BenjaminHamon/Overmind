@@ -19,9 +19,11 @@ namespace Overmind.Games.Chess
 			return (move[0] == 0) || (move[1] == 0);
 		}
 
-		public bool CanTake(Vector source, Vector target, out Vector destination)
+		public bool CanTake(Vector source, Vector target)
 		{
-			throw new NotImplementedException();
+			return CanMove(source, target);
 		}
+
+		public bool RequirePathCheck { get { return true; } }
 	}
 }
