@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkers", "Checkers\Checkers.csproj", "{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess", "Chess\Chess.csproj", "{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overmind.Games.CityBuilder", "Overmind.Games.CityBuilder\Overmind.Games.CityBuilder.csproj", "{054272FB-19EA-41BD-8B86-DEE592BA543A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overmind.Games.Checkers", "Overmind.Games.Checkers\Overmind.Games.Checkers.csproj", "{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overmind.Games.Chess", "Overmind.Games.Chess\Overmind.Games.Chess.csproj", "{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,10 +27,6 @@ Global
 		{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{054272FB-19EA-41BD-8B86-DEE592BA543A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
