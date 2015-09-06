@@ -3,7 +3,7 @@ using Overmind.Games.Engine;
 using System;
 using System.Collections.Generic;
 
-namespace Overmind.Checkers
+namespace Overmind.Games.Checkers
 {
 	public class Piece : Entity
 	{

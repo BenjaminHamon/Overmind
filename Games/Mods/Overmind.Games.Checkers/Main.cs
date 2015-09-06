@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace Overmind.Checkers
+namespace Overmind.Games.Checkers
 {
 	public class Main : IGameBuilder
 	{

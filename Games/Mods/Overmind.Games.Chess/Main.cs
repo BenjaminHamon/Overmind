@@ -6,7 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public class Main : IGameBuilder
 	{
@@ -52,14 +52,14 @@ namespace Overmind.Chess
 			{ new Vector(8, 7), typeof(Pawn) },
 		};
 
-		private const string ScriptDirectory = @"E:\Projects\Overmind\Games\Mods\Chess";
+		private const string ScriptDirectory = @"E:\Projects\Overmind\Games\Mods\Overmind.Games.Chess";
 
 		public Game Create()
 		{
 			Game game = new Game(8);
 
-			string filePath = Path.Combine(ScriptDirectory, String.Format("ScriptedStrategy_1.txt"));
-			IEnumerable<string> actionCollection = File.ReadAllLines(filePath);
+			//string filePath = Path.Combine(ScriptDirectory, String.Format("ScriptedStrategy_1.txt"));
+			//IEnumerable<string> actionCollection = File.ReadAllLines(filePath);
 
 			Player player = new Player(game, "White", Color.White);
 			player.EntityCollection = WhiteSetup.Select(pair =>

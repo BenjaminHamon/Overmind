@@ -1,7 +1,7 @@
 ﻿using Overmind.Games.Engine;
 using Overmind.Core;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public class Rook : Piece
 	{

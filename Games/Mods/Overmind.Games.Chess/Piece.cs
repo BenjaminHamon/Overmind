@@ -3,7 +3,7 @@ using Overmind.Games.Engine;
 using System;
 using System.Collections.Generic;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public abstract class Piece : Entity
 	{

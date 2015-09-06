@@ -1,7 +1,7 @@
 ﻿using Overmind.Core;
 using Overmind.Games.Engine;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public class MoveCommand : ICommand
 	{

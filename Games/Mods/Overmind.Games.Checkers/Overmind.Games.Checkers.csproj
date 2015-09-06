@@ -7,8 +7,8 @@
     <ProjectGuid>{F87F9FFA-AB20-4535-A6EF-0D7F57B3F7A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Overmind.Checkers</RootNamespace>
-    <AssemblyName>Overmind.Checkers</AssemblyName>
+    <RootNamespace>Overmind.Games.Checkers</RootNamespace>
+    <AssemblyName>Overmind.Games.Checkers</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

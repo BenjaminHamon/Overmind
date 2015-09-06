@@ -7,8 +7,8 @@
     <ProjectGuid>{10983559-B5A7-4119-BCF1-BA7ECAA87CD6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Overmind.Chess</RootNamespace>
-    <AssemblyName>Overmind.Chess</AssemblyName>
+    <RootNamespace>Overmind.Games.Chess</RootNamespace>
+    <AssemblyName>Overmind.Games.Chess</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

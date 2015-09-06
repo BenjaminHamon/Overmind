@@ -16,5 +16,5 @@
     "Rook.cs",
     "RookRule.cs"
   ],
-  "EntryPoint": "Overmind.Chess.Main"
+  "EntryPoint": "Overmind.Games.Chess.Main"
 }

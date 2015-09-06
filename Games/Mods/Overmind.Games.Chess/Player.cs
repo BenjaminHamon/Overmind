@@ -3,7 +3,7 @@ using Overmind.Games.Engine;
 using System;
 using System.Drawing;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public class Player : Overmind.Games.Engine.Player
 	{

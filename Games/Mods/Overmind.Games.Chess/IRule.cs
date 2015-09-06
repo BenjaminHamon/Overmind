@@ -1,6 +1,6 @@
 ﻿using Overmind.Core;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public interface IRule
 	{

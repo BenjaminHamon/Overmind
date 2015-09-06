@@ -1,7 +1,7 @@
 ﻿using Overmind.Core;
 using Overmind.Games.Engine;
 
-namespace Overmind.Checkers
+namespace Overmind.Games.Checkers
 {
 	public class MoveCommand : ICommand
 	{

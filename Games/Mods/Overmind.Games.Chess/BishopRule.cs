@@ -2,7 +2,7 @@
 using Overmind.Core;
 using System;
 
-namespace Overmind.Chess
+namespace Overmind.Games.Chess
 {
 	public class BishopRule : IRule
 	{

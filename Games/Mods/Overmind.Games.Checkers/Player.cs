@@ -3,7 +3,7 @@ using Overmind.Games.Engine;
 using System;
 using System.Drawing;
 
-namespace Overmind.Checkers
+namespace Overmind.Games.Checkers
 {
 	public class Player : Games.Engine.Player
 	{

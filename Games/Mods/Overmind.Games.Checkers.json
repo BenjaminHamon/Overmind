@@ -6,5 +6,5 @@
     "Main.cs",
     "ScriptedStrategy.cs"
   ],
-  "EntryPoint": "Overmind.Checkers.Main"
+  "EntryPoint": "Overmind.Games.Checkers.Main"
 }

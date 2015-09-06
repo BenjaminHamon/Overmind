@@ -4,7 +4,7 @@
 //using System.Collections.Generic;
 //using System.IO;
 
-//namespace Overmind.Checkers
+//namespace Overmind.Games.Checkers
 //{
 //	public class ScriptedStrategy : IStrategy, IDisposable
 //	{
