@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace Overmind.Games.Checkers
 {
-	public class Player : Games.Engine.Player
+	public class Player : Engine.Player
 	{
 		public Player(Game game, string name, Color color)
 			: base(game, name, color)
@@ -18,7 +18,7 @@ namespace Overmind.Games.Checkers
 
 			source.Position = destination;
 
-			InternalEndTurn();
+			IsTurnOver = true;
 		}
 
 		public void Take(Piece source, Vector target, Vector destination)
@@ -34,9 +34,9 @@ namespace Overmind.Games.Checkers
 			targetPiece.Destroy();
 			source.Position = destination;
 
-			InternalEndTurn();
+			IsTurnOver = true;
 		}
 
-		public override bool CanEndTurn { get { return false; } }
+		public override bool AutoEndTurn { get { return true; } }
 	}
 }

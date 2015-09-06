@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Overmind.Games.Chess
 {
-	public class Player : Overmind.Games.Engine.Player
+	public class Player : Engine.Player
 	{
 		public Player(Game game, string name, Color color)
 			: base(game, name, color)
@@ -21,7 +21,7 @@ namespace Overmind.Games.Chess
 
 			source.Position = destination;
 
-			InternalEndTurn();
+			IsTurnOver = true;
 		}
 
 		public void Take(Piece source, Vector target, bool checkPath)
@@ -37,7 +37,7 @@ namespace Overmind.Games.Chess
 			targetPiece.Destroy();
 			source.Position = target;
 
-			InternalEndTurn();
+			IsTurnOver = true;
 		}
 
 		private bool IsPathEmpty(Vector source, Vector destination)
@@ -54,6 +54,6 @@ namespace Overmind.Games.Chess
 			return true;
 		}
 
-		public override bool CanEndTurn { get { return false; } }
+		public override bool AutoEndTurn { get { return true; } }
 	}
 }

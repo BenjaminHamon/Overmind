@@ -54,18 +54,15 @@ namespace Overmind.Games.Engine
 			//	Strategy.Update();
 		}
 
-		public virtual bool CanEndTurn { get { return true; } }
+		/// <summary>True if the player turn should end automatically.</summary>
+		public virtual bool AutoEndTurn { get { return false; } }
+		/// <summary>True if the player cannot do any more actions this turn.</summary>
+		public bool IsTurnOver { get; protected set; }
 
 		public void EndTurn()
 		{
-			if (CanEndTurn == false)
-				throw new Exception("[Player.EndTurn] Forbidden");
-			InternalEndTurn();
-		}
-
-		protected void InternalEndTurn()
-		{
 			Update();
+			IsTurnOver = false;
 			game.EndTurn();
 		}
 

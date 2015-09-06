@@ -1,4 +1,5 @@
-﻿using Overmind.Games.Engine;
+﻿using Overmind.Core.Log;
+using Overmind.Games.Engine;
 using Overmind.Unity;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace Overmind.Games.Unity
 				}
 			}
 
-			if (Player.CanEndTurn)
+			if (Player.AutoEndTurn == false)
 				EndTurnButton.SetActive(true);
 		}
 
@@ -73,9 +74,19 @@ namespace Overmind.Games.Unity
 				Selection.Item = sender;
 			else
 			{
-				CurrentCommand.Execute(sender.Position);
+				try
+				{
+					CurrentCommand.Execute(sender.Position);
+					Selection.Item = sender;
+				}
+				catch (Exception exception)
+				{
+					LoggerFacade.LogError(exception.Message);
+				}
 				CurrentCommand = null;
-				Selection.Item = null;
+
+				if (Player.AutoEndTurn && Player.IsTurnOver)
+					EndTurn();
 			}
 		}
 

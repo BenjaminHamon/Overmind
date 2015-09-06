@@ -118,7 +118,10 @@ namespace Overmind.Games.Unity
 		private void OnTurnStarted(Game sender)
 		{
 			if (activePlayerView != null)
+			{
 				activePlayerView.gameObject.SetActive(false);
+				activePlayerView.Selection.Item = null;
+			}
 
 			activePlayerView = playerViewCollection.First(playerView => playerView.Player == game.ActivePlayer);
 			activePlayerView.gameObject.SetActive(true);
