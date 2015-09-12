@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace Overmind.Games.Console
 {
+	/// <summary>Console user interface for a game.</summary>
 	public class GameShell : Shell
 	{
 		public GameShell()
@@ -24,7 +25,6 @@ namespace Overmind.Games.Console
 			game.TurnStarted += _ => Draw();
 			game.Start();
 		}
-
 
 		private void Play()
 		{

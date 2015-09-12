@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Overmind.Games.Console
 {
+	/// <summary>Main shell for the console application itself.</summary>
 	public class ApplicationShell : Shell
 	{
 		public ApplicationShell()
