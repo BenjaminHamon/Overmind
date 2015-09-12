@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Overmind.Games.Console.Application</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Overmind.Core">
       <HintPath>..\..\Core\Overmind.Core.Net35\bin\Debug\Overmind.Core.dll</HintPath>
@@ -49,13 +52,13 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleApplication.cs" />
+    <Compile Include="ApplicationShell.cs" />
     <Compile Include="ConsoleExtensions.cs" />
-    <Compile Include="GameView.cs" />
+    <Compile Include="GameShell.cs" />
     <Compile Include="GridView.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Application.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewBase.cs" />
+    <Compile Include="Shell.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -67,11 +70,4 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
