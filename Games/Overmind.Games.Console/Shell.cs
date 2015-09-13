@@ -14,7 +14,7 @@ namespace Overmind.Games.Console
 	{
 		protected Shell()
 		{
-			commandInterpreter.RegisterCommand("help", _ => Help());
+			commandInterpreter.RegisterCommand("help", Help);
 			commandInterpreter.RegisterCommand("exit", _ => Exit());
 		}
 
@@ -66,7 +66,7 @@ namespace Overmind.Games.Console
 			isRunning = false;
 		}
 
-		private void Help()
+		protected virtual void Help(IList<string> arguments)
 		{
 			IEnumerable<string> commands =  commandInterpreter.CommandNames.OrderBy(c => c);
 			Output.WriteLine(String.Join(" ", commands.ToArray()));
