@@ -55,9 +55,12 @@
     <Compile Include="ApplicationShell.cs" />
     <Compile Include="ConsoleExtensions.cs" />
     <Compile Include="GameShell.cs" />
+    <Compile Include="GameView.cs" />
     <Compile Include="GridView.cs" />
     <Compile Include="Application.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Simulation.cs" />
+    <Compile Include="Replay.cs" />
     <Compile Include="Shell.cs" />
   </ItemGroup>
   <ItemGroup>

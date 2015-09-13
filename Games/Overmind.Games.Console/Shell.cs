@@ -22,9 +22,9 @@ namespace Overmind.Games.Console
 
 		private bool isRunning = false;
 
-		protected TextReader input = System.Console.In;
-		protected TextWriter output = System.Console.Out;
-		protected TextWriter errorOutput = System.Console.Out;
+		public TextReader Input = System.Console.In;
+		public TextWriter Output = System.Console.Out;
+		public TextWriter ErrorOutput = System.Console.Out;
 
 		private string prompt = "> ";
 		private string separator = Environment.NewLine;
@@ -42,27 +42,25 @@ namespace Overmind.Games.Console
 
 			while (isRunning)
 			{
-				output.Write(prompt);
+				Output.Write(prompt);
 				try
-				{ commandInterpreter.ExecuteCommand(input.ReadLine()); }
+				{ commandInterpreter.ExecuteCommand(Input.ReadLine()); }
 				catch (Exception exception)
 				{
 					System.Console.ForegroundColor = ConsoleColor.Red;
-					errorOutput.WriteLine(exception);
+					ErrorOutput.WriteLine(exception);
 					if (isRunning == false)
 					{
-						errorOutput.WriteLine("Error while exiting, press any key to end");
-						input.Read();
+						ErrorOutput.WriteLine("Error while exiting, press any key to end");
+						Input.Read();
 					}
 					System.Console.ResetColor();
 				}
-				output.Write(separator);
+				Output.Write(separator);
 			}
 		}
 
-		/// <summary>
-		/// Disposes resources and stops the shell execution.
-		/// </summary>
+		/// <summary>Disposes resources and stops the shell execution.</summary>
 		protected virtual void Exit()
 		{
 			isRunning = false;
@@ -71,7 +69,7 @@ namespace Overmind.Games.Console
 		private void Help()
 		{
 			IEnumerable<string> commands =  commandInterpreter.CommandNames.OrderBy(c => c);
-			output.WriteLine(String.Join(" ", commands.ToArray()));
+			Output.WriteLine(String.Join(" ", commands.ToArray()));
 		}
 
 		/// <summary>Helper to read input with a message explaining what is expected.</summary>
@@ -80,8 +78,8 @@ namespace Overmind.Games.Console
 		protected string Read(string message = null)
 		{
 			if (String.IsNullOrEmpty(message) == false)
-				output.Write(message + ": ");
-			return input.ReadLine();
+				Output.Write(message + ": ");
+			return Input.ReadLine();
 		}
 	}
 }

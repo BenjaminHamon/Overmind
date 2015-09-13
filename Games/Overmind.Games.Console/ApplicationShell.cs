@@ -10,8 +10,10 @@ namespace Overmind.Games.Console
 	{
 		public ApplicationShell()
 		{
-			commandInterpreter.RegisterCommand("list", _ => output.WriteLine(String.Join(" ", loader.GetModList().ToArray())));
+			commandInterpreter.RegisterCommand("list", _ => Output.WriteLine(String.Join(" ", loader.GetModList().ToArray())));
 			commandInterpreter.RegisterCommand("play", args => new GameShell().Run(args));
+			commandInterpreter.RegisterCommand("replay", args => new Replay(Output).Run(args));
+			commandInterpreter.RegisterCommand("simulate", args => new Simulation().Run(args));
 		}
 
 		private readonly Loader loader = new Loader(ConfigurationManager.AppSettings["ModPath"]);

@@ -7,31 +7,19 @@ namespace Overmind.Games.Console
 {
 	public class GridView<TItem>
 	{
-		public GridView(TextWriter writer)
+		public GridView(TextWriter output)
 		{
-			this.Writer = writer;
+			if (output == null)
+				throw new ArgumentNullException("output", "[GridView.Constructor] Output must not be null.");
+			this.output = output;
 		}
 
-		private TextWriter writer;
-		public TextWriter Writer
-		{
-			get { return writer; }
-			set
-			{
-				if (value == null)
-					throw new ArgumentNullException("writer", "Writer must not be null");
-				writer = value;
-			}
-		}
+		private readonly TextWriter output;
 
-		/// <summary>
-		/// Action executed before an element is drawn.
-		/// </summary>
+		/// <summary>Action executed before an element is drawn.</summary>
 		public Action<TItem> PreWrite;
 
-		/// <summary>
-		/// Action executed after an element is drawn.
-		/// </summary>
+		/// <summary>Action executed after an element is drawn.</summary>
 		public Action<TItem> PostWrite;
 
 		public bool DrawAxis = true;
@@ -71,39 +59,39 @@ namespace Overmind.Games.Console
 			for (double rowIndex = rowMax; rowIndex >= rowMin; rowIndex -= Step)
 			{
 				if (rowIndex != rowMax)
-					Writer.WriteLine(rowCompleteSeparator);
+					output.WriteLine(rowCompleteSeparator);
 
 				if (DrawAxis)
-					Writer.Write(Pad(rowIndex.ToString()) + ColumnSeparator);
+					output.Write(Pad(rowIndex.ToString()) + ColumnSeparator);
 
 				for (double columnIndex = columnMin; columnIndex <= columnMax; columnIndex += Step)
 				{
 					if (columnIndex != columnMin)
-						Writer.Write(ColumnSeparator);
+						output.Write(ColumnSeparator);
 					double[] position = { columnIndex, rowIndex };
 					TItem item = itemCollection.FirstOrDefault(x => positionGetter(x).SequenceEqual(position));
 					if (EqualityComparer<TItem>.Default.Equals(item, default(TItem)) == false)
 						DrawItem(item, descriptor);
 					else
-						Writer.Write(Pad(""));
+						output.Write(Pad(""));
 				}
 
-				Writer.WriteLine();
+				output.WriteLine();
 
 			}
 
 			if (DrawAxis)
 			{
-				Writer.WriteLine(rowCompleteSeparator);
+				output.WriteLine(rowCompleteSeparator);
 
-				Writer.Write(Pad("") + ColumnSeparator);
+				output.Write(Pad("") + ColumnSeparator);
 				for (double columnIndex = columnMin; columnIndex <= columnMax; columnIndex += Step)
 				{
 					if (columnIndex != columnMin)
-						Writer.Write(ColumnSeparator);
-					Writer.Write(Pad(columnIndex.ToString()));
+						output.Write(ColumnSeparator);
+					output.Write(Pad(columnIndex.ToString()));
 				}
-				Writer.WriteLine();
+				output.WriteLine();
 			}
 		}
 
@@ -111,7 +99,7 @@ namespace Overmind.Games.Console
 		{
 			if (PreWrite != null)
 				PreWrite(item);
-			Writer.Write(Pad(descriptor(item)));
+			output.Write(Pad(descriptor(item)));
 			if (PostWrite != null)
 				PostWrite(item);
 		}
