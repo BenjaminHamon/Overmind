@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overmind.Unity", "Overmind.Unity\Overmind.Unity.csproj", "{4682C66A-93B6-4E3E-9277-D2DF0651CBD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overmind.Unity.Editor", "Overmind.Unity.Editor\Overmind.Unity.Editor.csproj", "{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{4682C66A-93B6-4E3E-9277-D2DF0651CBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4682C66A-93B6-4E3E-9277-D2DF0651CBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4682C66A-93B6-4E3E-9277-D2DF0651CBD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,2 @@
+To build the projects, you need to set the reference paths in project properties to the Unity installation directory.
+The reference path should be something like: "[Unity installation directory]\Editor\Data\Managed\"

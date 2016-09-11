@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4682C66A-93B6-4E3E-9277-D2DF0651CBD7}</ProjectGuid>
+    <ProjectGuid>{B46940AA-A2BB-4618-9D57-D6F594FBD5AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Overmind.Unity</RootNamespace>
-    <AssemblyName>Overmind.Unity</AssemblyName>
+    <RootNamespace>Overmind.Unity.Editor</RootNamespace>
+    <AssemblyName>Overmind.Unity.Editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -32,12 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="UnityEditor" />
     <Reference Include="UnityEngine" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExposePropertyAttribute.cs" />
-    <Compile Include="MonoBehaviourBase.cs" />
+    <Compile Include="AssetBundleManager.cs" />
+    <Compile Include="MonoBehaviourBaseEditor.cs" />
+    <Compile Include="Plugin.cs" />
+    <Compile Include="PluginManager.cs" />
+    <Compile Include="PluginManifest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Overmind.Unity\Overmind.Unity.csproj">
+      <Project>{4682c66a-93b6-4e3e-9277-d2df0651cbd7}</Project>
+      <Name>Overmind.Unity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
